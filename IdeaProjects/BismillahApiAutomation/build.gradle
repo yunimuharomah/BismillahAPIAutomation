@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.yunimuharomah'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:7.10.2'
+    testImplementation group :'io.rest-assured', name:'rest-assured', version:'5.3.2'
+    testImplementation 'io.rest-assured:json-path:5.4.0'
+    testImplementation 'org.json:json:20231013'
+
+    // GSON (untuk JSON (de)serialisasi POJO)
+    testImplementation 'com.google.code.gson:gson:2.10.1'
+
+    // Hamcrest (untuk assertions yang lebih ekspresif)
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+
+    testImplementation 'org.slf4j:slf4j-api:2.0.13'
+    testImplementation 'ch.qos.logback:logback-classic:1.5.14'
+
+}
+
+configurations.all {
+    resolutionStrategy {
+        // ... (dependensi lain) ...
+        force 'commons-codec:commons-codec:1.15'
+        force 'org.apache.commons:commons-lang3:3.15.0'
+        force 'ch.qos.logback:logback-core:1.5.14'
+        force 'ch.qos.logback:logback-classic:1.5.14'
+        force 'org.bouncycastle:bcprov-jdk18on:1.78'
+        force 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+        force 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+        force 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    }
+}
+
+tasks.withType(Test).configureEach {
+    useTestNG() // Menggunakan TestNG sebagai runner
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        showCauses true
+        showStackTraces true
+    }
+}
