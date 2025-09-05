@@ -41,6 +41,7 @@ public class ApiUserClient {
     public Response getListOfUsers(int page) {
         logger.info("Mengirim GET request untuk daftar user halaman: " + page);
         return RestAssured.given()
+                .header("x-api-key", "reqres-free-v1")
                 .queryParam("page", page)
                 .when()
                 .get("/users");
@@ -58,6 +59,7 @@ public class ApiUserClient {
     public Response createUser(UserPayload user) {
         logger.info("Mengirim POST request untuk membuat user: " + user.getName());
         return RestAssured.given()
+                .header("x-api-key", "reqres-free-v1") // Set header default untuk semua request
                 .contentType(ContentType.JSON)
                 .body(user) // Body akan berisi name dan job
                 .when()

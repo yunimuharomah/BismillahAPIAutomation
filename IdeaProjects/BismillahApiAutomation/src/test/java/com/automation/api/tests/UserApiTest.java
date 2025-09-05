@@ -22,8 +22,8 @@ public class UserApiTest extends ApiTestBase {
         assertThat(response.jsonPath().getString("data.last_name"), notNullValue());
     }
 
-    /* HELP KAK, SETIAP KALI AKU UNCOMMENT INI DAN DIJALANKAN SELALU ERROR :(
-    *   @Test(description = "Positive: Get list of users on page 1") // TestNG Test dengan deskripsi
+
+       @Test(description = "Positive: Get list of users on page 1") // TestNG Test dengan deskripsi
     public void testGetListOfUsers() {
         int page = 1;
         response = apiUserClient.getListOfUsers(page);
@@ -43,6 +43,7 @@ public class UserApiTest extends ApiTestBase {
     public void testCreateNewUser() {
         requestPayload = new UserPayload("morpheus", "leader");
         response = apiUserClient.createUser(requestPayload);
+        System.out.println("Response Body: " + response.body().asString());
 
         assertThat("Status code should be 201 (Created)", response.statusCode(), is(201));
         assertNotNull(response.jsonPath().getString("id"));
@@ -51,7 +52,7 @@ public class UserApiTest extends ApiTestBase {
         assertNotNull(response.jsonPath().getString("createdAt"));
         createdId = response.jsonPath().getString("id"); // Simpan ID yang dibuat
     }
-    * */
+
 
 
 }
